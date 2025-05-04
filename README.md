@@ -1,23 +1,47 @@
 # UnifiedGraphicDisplay
 
+このHardware Abstraction Layer(HAL)は，Arduinoに[GIGA Display Shield][GigaDisplayShield]の
+ようなグラフィックディスプレイとSD(やマイクロSD)を接続し，SD上に保存された
+イメージとコマンドで送られた文字列を表示することで，スライドショーのようなものを
+実現するためのものである．
 
-## 外部リンク
+今のところ，統合を目指しているグラフィックディスプレイ用ライブラリは以下の3種類．
+- [GIGA Display Shield用ライブラリ][Arduino_GigaDisplay_GFX]
+- [TFT_eSPI Library][TFT_eSPI]
+- [Adafruit ILI9341 Arduino Library][ILI9341Lib]
+
+## 動作確認済みデバイス
+現状，動作が確認できているのは以下のディスプレイのみ．
+- [GIGA Display Shield][GigaDisplayShield]
+
+## 使い方
+このHALは設定を変更しないと，3種類のグラフィックディスプレイ用のデバイスドライバを
+取り込んでしまうため，メモリの無駄が発生する．これを防止するためには，
+```UnifiedGraphicDisplay_config.h```の```#undef```を使い，使用するライブラリのみを
+取り込むようにする．以下の例は，[GIGA Display Shield][GigaDisplayShield]のみを
+使う設定．
+
+```C:UnifiedGraphicDisplay_config.h
+//#undef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
+#undef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
+#undef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
+```
+
+
+<!-- 以下は，外部リンクの定義 
 - Adafruit Unified Sensor Driver - [https://github.com/adafruit/Adafruit_Sensor][AdafruitUSD]
-- Groveシールド - [https://www.seeedstudio.com/Base-Shield-V2-p-1378.html][shield]
-- Arduino M0 Pro - [https://store.arduino.cc/usa/arduino-m0-pro][M0Pro]
-- Arduino Due - [https://store.arduino.cc/usa/arduino-due][Due]
-- Arduino Uno R3 - [https://store.arduino.cc/usa/arduino-uno-rev3][Uno]
-- Arduino Uno WiFi - [https://store.arduino.cc/usa/arduino-uno-wifi-rev2][UnoWiFi]
-- Arduino Leonardo Ethernet - [https://store.arduino.cc/usa/arduino-leonardo-eth][LeonardoEth]
-- Arduino Mega2560 R3 - [https://store.arduino.cc/usa/arduino-mega-2560-rev3][Mega]
-- Arduino Pro mini 328 - 3.3V/8MHz - [https://www.sparkfun.com/products/11114][ProMini]
-- ESPr developer - [https://www.switch-science.com/catalog/2652/][ESPrDev]
-- ESPr Developer用GROVEシールド - [https://www.switch-science.com/catalog/2811/][ESPrDevShield]
-- ESPr one 32 - [https://www.switch-science.com/catalog/3555/][ESPrOne32]
-- Grove - [https://www.seeedstudio.io/category/Grove-c-1003.html][Grove]
-- Seed Studio - [https://www.seeedstudio.io/][SeedStudio]
-- Sparkfun Electronics - [https://www.sparkfun.com/][Sparkfun]
-- スイッチサイエンス - [https://www.switch-science.com/][SwitchScience]
+-->
+
+
+<!-- Arduino_GigaDisplay_GFX Library -->
+[Arduino_GigaDisplay_GFX]:https://github.com/arduino-libraries/Arduino_GigaDisplay_GFX
+<!-- GIGA Display Shield -->
+[GigaDisplayShield]:https://docs.arduino.cc/hardware/giga-display-shield/
+<!-- Adafruit ILI9341 Arduino Library -->
+[ILI9341Lib]:https://github.com/adafruit/Adafruit_ILI9341
+<!-- TFT_eSPI Library -->
+[TFT_eSPI]:https://github.com/Bodmer/TFT_eSPI
+
 
 <!-- 以下は，外部リンクの定義 -->
 [GroveBarometerSensorBMP180]:http://wiki.seeedstudio.com/Grove-Barometer_Sensor-BMP180/
