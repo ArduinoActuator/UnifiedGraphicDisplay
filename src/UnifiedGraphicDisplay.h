@@ -51,11 +51,17 @@
 
 #include <TJpg_Decoder.h>
 
-enum UnifiedDisplayType {
+typedef enum {
   DISPLAY_TYPE_GIGA_DISPLAY_GFX =1,
   DISPLAY_TYPE_ADAFRUIT_GFX,
   DISPLAY_TYPE_BODMER_TFT_ESPI
-};
+} UnifiedDisplayType;
+
+typedef enum {
+  GFX_FUNCTION_UNSUPPORTED = 1,
+  GFX_FUNCTION_SUCCESS,
+  GFX_FUNCTION_FAIL,
+} graphicFunctionReturnValue;
 
 //class UnifiedGraphicDisplay  {
 class UnifiedGraphicDisplay : public Print {
@@ -69,17 +75,17 @@ public:
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
   UnifiedGraphicDisplay(Adafruit_ILI9341 *tft, UnifiedDisplayType type);
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
-  int fillScreen(uint16_t color);
-  int setTextColor(uint16_t fg, uint16_t bg);
-  int setCursor(int16_t x, int16_t y);
-  int setTextWrap(bool w);
-  int setTextSize(uint8_t s);
-  int setTextSize(uint8_t sx, uint8_t sy);
-  int setFont(const GFXfont *f=NULL);
-  int drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], int16_t w, int16_t h);
-  int drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, int16_t w, int16_t h);
-  int drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], const uint8_t mask[], int16_t w, int16_t h);
-  int drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, uint8_t *mask, int16_t w, int16_t h);
+  graphicFunctionReturnValue fillScreen(uint16_t color);
+  graphicFunctionReturnValue setTextColor(uint16_t fg, uint16_t bg);
+  graphicFunctionReturnValue setCursor(int16_t x, int16_t y);
+  graphicFunctionReturnValue setTextWrap(bool w);
+  graphicFunctionReturnValue setTextSize(uint8_t s);
+  graphicFunctionReturnValue setTextSize(uint8_t sx, uint8_t sy);
+  graphicFunctionReturnValue setFont(const GFXfont *f=NULL);
+  graphicFunctionReturnValue drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], int16_t w, int16_t h);
+  graphicFunctionReturnValue drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, int16_t w, int16_t h);
+  graphicFunctionReturnValue drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], const uint8_t mask[], int16_t w, int16_t h);
+  graphicFunctionReturnValue drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, uint8_t *mask, int16_t w, int16_t h);
   uint16_t width(void);
   uint16_t height(void);
   size_t write(uint8_t c);
@@ -87,13 +93,13 @@ public:
 private:
   UnifiedDisplayType _type;
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
-  GigaDisplay_GFX *_tft;
+  GigaDisplay_GFX *_tftGiga;
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
   TFT_eSPI *_tft;
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
-  Adafruit_ILI9341 *_tft;
+  Adafruit_ILI9341 *_tftAda;
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
 };
 

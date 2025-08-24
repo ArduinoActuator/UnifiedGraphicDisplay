@@ -2,7 +2,7 @@
 
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
 UnifiedGraphicDisplay::UnifiedGraphicDisplay(GigaDisplay_GFX *tft, UnifiedDisplayType type):
-  _tft(tft),
+  _tftGiga(tft),
   _type(type)
 {}
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
@@ -16,279 +16,280 @@ UnifiedGraphicDisplay::UnifiedGraphicDisplay(TFT_eSPI *tft, UnifiedDisplayType t
 
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
 UnifiedGraphicDisplay::UnifiedGraphicDisplay(Adafruit_ILI9341 *tft, UnifiedDisplayType type):
-  _tft(tft),
+  _tftAda(tft),
   _type(type)
 {}
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
 
-int UnifiedGraphicDisplay::fillScreen(uint16_t color) {
+graphicFunctionReturnValue UnifiedGraphicDisplay::fillScreen(uint16_t color) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->fillScreen(color);
-      return 0;
+      _tftGiga->fillScreen(color);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->fillScreen(color);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->fillScreen(color);
-      return 0;
+      _tftAda->fillScreen(color);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::setTextColor(uint16_t fg, uint16_t bg) {
+graphicFunctionReturnValue UnifiedGraphicDisplay::setTextColor(uint16_t fg, uint16_t bg) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
+      _tftGiga->setTextColor(fg, bg);
+      return GFX_FUNCTION_SUCCESS;
+    }
+#endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
+#ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
+    case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->setTextColor(fg, bg);
-      return 0;
-    }
-#endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
-#ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
-    case DISPLAY_TYPE_BODMER_TFT_ESPI: {
-      _tft->setTextColor(fg, bg);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->setTextColor(fg, bg);
-      return 0;
+      _tftAda->setTextColor(fg, bg);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::setCursor(int16_t x, int16_t y){
+graphicFunctionReturnValue UnifiedGraphicDisplay::setCursor(int16_t x, int16_t y){
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->setCursor(x, y);
-      return 0;
+      _tftGiga->setCursor(x, y);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->setCursor(x, y);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->setCursor(x, y);
-      return 0;
+      _tftAda->setCursor(x, y);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::setTextWrap(bool w) {
+graphicFunctionReturnValue UnifiedGraphicDisplay::setTextWrap(bool w) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
+      _tftGiga->setTextWrap(w);
+      return GFX_FUNCTION_SUCCESS;
+    }
+#endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
+#ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
+    case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->setTextWrap(w);
-      return 0;
-    }
-#endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
-#ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
-    case DISPLAY_TYPE_BODMER_TFT_ESPI: {
-      _tft->setTextWrap(w);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->setTextWrap(w);
-      return 0;
+      _tftAda->setTextWrap(w);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::setTextSize(uint8_t s) {
+graphicFunctionReturnValue UnifiedGraphicDisplay::setTextSize(uint8_t s) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->setTextSize(s);
-      return 0;
+      _tftGiga->setTextSize(s);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->setTextSize(s);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->setTextSize(s);
-      return 0;
+      _tftAda->setTextSize(s);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
-int UnifiedGraphicDisplay::setTextSize(uint8_t x, uint8_t y) {
+
+graphicFunctionReturnValue UnifiedGraphicDisplay::setTextSize(uint8_t x, uint8_t y) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
+      _tftGiga->setTextSize(x, y);
+      return GFX_FUNCTION_SUCCESS;
+    }
+#endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
+#ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
+    case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->setTextSize(x, y);
-      return 0;
-    }
-#endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
-#ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
-    case DISPLAY_TYPE_BODMER_TFT_ESPI: {
-      _tft->setTextSize(x, y);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->setTextSize(x, y);
-      return 0;
+      _tftAda->setTextSize(x, y);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::setFont(const GFXfont *f) {
+graphicFunctionReturnValue UnifiedGraphicDisplay::setFont(const GFXfont *f) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->setFont(f);
-      return 0;
+      _tftGiga->setFont(f);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->setFont(f);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->setFont(f);
-      return 0;
+      _tftAda->setFont(f);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], int16_t w, int16_t h){
+graphicFunctionReturnValue UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], int16_t w, int16_t h){
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,w,h);
-      return 0;
+      _tftGiga->drawRGBBitmap(x,y,bitmap,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->drawRGBBitmap(x,y,bitmap,w,h);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,w,h);
-      return 0;
+      _tftAda->drawRGBBitmap(x,y,bitmap,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, int16_t w, int16_t h) {
+graphicFunctionReturnValue UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, int16_t w, int16_t h) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,w,h);
-      return 0;
+      _tftGiga->drawRGBBitmap(x,y,bitmap,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->drawRGBBitmap(x,y,bitmap,w,h);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,w,h);
-      return 0;
+      _tftAda->drawRGBBitmap(x,y,bitmap,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], const uint8_t mask[], int16_t w, int16_t h) {
+graphicFunctionReturnValue UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, const uint16_t bitmap[], const uint8_t mask[], int16_t w, int16_t h) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,mask,w,h);
-      return 0;
+      _tftGiga->drawRGBBitmap(x,y,bitmap,mask,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->drawRGBBitmap(x,y,bitmap,mask,w,h);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,mask,w,h);
-      return 0;
+      _tftAda->drawRGBBitmap(x,y,bitmap,mask,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
-int UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, uint8_t *mask, int16_t w, int16_t h){
+graphicFunctionReturnValue UnifiedGraphicDisplay::drawRGBBitmap(int16_t x, int16_t y, uint16_t *bitmap, uint8_t *mask, int16_t w, int16_t h){
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,mask,w,h);
-      return 0;
+      _tftGiga->drawRGBBitmap(x,y,bitmap,mask,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
     case DISPLAY_TYPE_BODMER_TFT_ESPI: {
       _tft->drawRGBBitmap(x,y,bitmap,mask,w,h);
-      return 0;
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      _tft->drawRGBBitmap(x,y,bitmap,mask,w,h);
-      return 0;
+      _tftAda->drawRGBBitmap(x,y,bitmap,mask,w,h);
+      return GFX_FUNCTION_SUCCESS;
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
-  return -1;
+  return GFX_FUNCTION_UNSUPPORTED;
 }
 
 uint16_t UnifiedGraphicDisplay::width(void) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      return _tft->width();
+      return _tftGiga->width();
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
@@ -298,7 +299,7 @@ uint16_t UnifiedGraphicDisplay::width(void) {
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      return _tft->width();
+      return _tftAda->width();
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
@@ -309,7 +310,7 @@ uint16_t UnifiedGraphicDisplay::height(void) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      return _tft->height();
+      return _tftGiga->height();
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
@@ -319,7 +320,7 @@ uint16_t UnifiedGraphicDisplay::height(void) {
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      return _tft->height();
+      return _tftAda->height();
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
@@ -330,7 +331,7 @@ size_t UnifiedGraphicDisplay::write(uint8_t c) {
   switch(_type) {
 #ifdef GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX
     case DISPLAY_TYPE_GIGA_DISPLAY_GFX: {
-      return _tft->write(c);
+      return _tftGiga->write(c);
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_GIGA_DISPLAY_GFX */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI
@@ -340,7 +341,7 @@ size_t UnifiedGraphicDisplay::write(uint8_t c) {
 #endif /* GRAPHIC_DISPLAY_HAL_USE_BODMER_TFT_ESPI */
 #ifdef GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX
     case DISPLAY_TYPE_ADAFRUIT_GFX: {
-      return _tft->write(c);
+      return _tftAda->write(c);
     }
 #endif /* GRAPHIC_DISPLAY_HAL_USE_ADAFRUIT_GFX */
   }
