@@ -46,11 +46,14 @@
 //#define TFT_ILI9341_PIN_MISO  12
 //#define TFT_ILI9341_PIN_CLK   13
 #define TFT_ILI9341_PIN_DC    4
-#define TFT_ILI9341_PIN_RST   5
-#define TFT_ILI9341_PIN_CS    6
-#define TFT_ILI9341_PIN_MOSI  8
-#define TFT_ILI9341_PIN_MISO  10
-#define TFT_ILI9341_PIN_CLK   9
+#define TFT_ILI9341_PIN_RST   3
+#define TFT_ILI9341_PIN_CS    2
+//#define TFT_ILI9341_PIN_DC    4
+//#define TFT_ILI9341_PIN_RST   5
+//#define TFT_ILI9341_PIN_CS    6
+//#define TFT_ILI9341_PIN_MOSI  8
+//#define TFT_ILI9341_PIN_MISO  10
+//#define TFT_ILI9341_PIN_CLK   9
 #endif /* USE_CONVERTER */
 
 #include "UnifiedGraphicDisplay.h"
