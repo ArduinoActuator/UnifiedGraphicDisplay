@@ -1,5 +1,5 @@
 
-/* Graphic Display : 現状GIGAディスプレイのみ動く */
+/* Graphic Display */
 //#define USE_GIGA_DISPLAY_GFX
 //#define USE_BODMER_TFT_ESPI
 #define USE_ADAFRUIT_GFX
