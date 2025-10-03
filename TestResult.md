@@ -499,30 +499,6 @@ bitmap画像の作り方等は以下の参考文献を参照．
 
 <!-- Arduino 本体 -->
 
-|機種名|[GIGA Display Shield][GigaDisplayShield]|[ILI9341搭載2.8インチSPI制御タッチパネル付TFT液晶][MSP2807]|
-|---|---|---|
-|[Arduino Nano ESP32][NanoESP32]|-|◯|
-|[Arduino Mega 2560][Mega2560]|-|未|
-|[Arduino M0 pro][M0Pro]|-|◯|
-|[Arduino UNO R4 WiFi][UnoR4WiFi]|-|未|
-|[Arduino UNO R4 Minima][UnoR4Minima]|-|未|
-|[Arduino Nano 33 IoT][Nano33IoT]|-|◯|
-|[Arduino Giga R1 Wifi][GigaR1WiFi]|◯|◯|
-|[Arduino MKR WiFi 1010][MKRWiFi1010]|-|◯|
-|[Ardino MKR Zero][MKRZero]|-|◯|
-|[Arduino Nano RP2040 Connect][NanoRP2040Connect]|-|未|
-
-
-|内容|意味|
-|---|---|
-|◯|動作する|
-|△|動作電圧の変換等を行えば動作する|
-|▲|一部の機能が動作しない|
-|✕|動作しない|
-|-|原理的に互換性がない|
-|未|未検証|
-
-
 
 |機種名|コア|MCU|動作電圧|
 |---|---|---|---|
